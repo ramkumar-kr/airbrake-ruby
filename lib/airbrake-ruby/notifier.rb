@@ -58,6 +58,11 @@ module Airbrake
       send_notice(exception, params, @sync_sender).value
     end
 
+    def notify_job(exception, params = {})
+      serialized_exception = YAML.dump(exception)
+      ActivejobSender.perform_later(serialized_exception, params)
+    end
+
     ##
     # @macro see_public_api_method
     def add_filter(filter = nil, &block)

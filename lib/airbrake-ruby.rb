@@ -11,6 +11,7 @@ require 'airbrake-ruby/config/validator'
 require 'airbrake-ruby/promise'
 require 'airbrake-ruby/sync_sender'
 require 'airbrake-ruby/async_sender'
+require 'airbrake-ruby/activejob_sender'
 require 'airbrake-ruby/response'
 require 'airbrake-ruby/nested_exception'
 require 'airbrake-ruby/notice'
@@ -154,6 +155,10 @@ module Airbrake
     # @return [Hash{String=>String}] the reponse from the server
     # @see .notify
     def notify_sync(exception, params = {}, notifier = :default)
+      call_notifier(notifier, __method__, exception, params)
+    end
+
+    def notify_job(exception, params = {}, notifier = :default)
       call_notifier(notifier, __method__, exception, params)
     end
 

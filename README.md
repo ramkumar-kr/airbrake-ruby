@@ -104,6 +104,17 @@ end
 
 puts "\nAnother ZeroDivisionError was sent to Airbrake, but this time synchronously.",
      "See it at #{response['url']}"
+
+# Asynchronous Delivery using ActiveJob
+begin
+  1/0
+rescue ZeroDivisionError => ex
+  # Return value is a Hash.
+  response = Airbrake.notify_job(ex)
+end
+
+puts "\nAnother ZeroDivisionError was sent to Airbrake, but this time asynchronously using ActiveJob.",
+     "Find it at your project's dashboard on https://airbrake.io"
 ```
 
 ### Creating a named notifier
