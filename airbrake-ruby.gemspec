@@ -26,7 +26,7 @@ DESC
   s.test_files   = Dir.glob('spec/**/*')
 
   s.required_ruby_version = '>= 2.0'
-  s.add_dependency 'activejob'
+  s.add_dependency 'activejob', '4.2.3'
 
   s.add_development_dependency 'rspec', '~> 3'
   s.add_development_dependency 'rake', '~> 10'
